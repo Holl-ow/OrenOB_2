@@ -1,5 +1,4 @@
 import {$authHost, $host} from "./index"
-import jwt_decode from "jwt-decode"
 
 export const createType = async (type) => {
     const {data} = await $authHost.post('api/type_obj', type)
@@ -35,5 +34,15 @@ export const fetchObjects = async (categ, page, limit= 5) => {
 
 export const fetchOneObject = async (id) => {
     const {data} = await $host.get('api/object/' + id)
+    return data
+}
+
+export const createTag = async (tag) => {
+    const {data} = await $authHost.post('api/tag', tag)
+    return data
+}
+
+export const fetchTags = async () => {
+    const {data} = await $host.get('api/tag')
     return data
 }

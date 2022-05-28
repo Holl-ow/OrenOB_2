@@ -6,7 +6,6 @@ schema = new Schema({
     type: {type: Types.ObjectId, ref: 'Type'},
     adress: {type: String, required: true},
     working_time: {type: String, required: true},
-    break_time: {type: String, required: false},
     working_days: {type: String, required: true},
     description: {type: String, required: false},
     phone: {type: String, required: false},

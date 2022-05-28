@@ -8,14 +8,14 @@ class ObjectController {
         
         try {
             
-            let {name, category, type, adress, working_time, break_time, working_days,
+            let {name, category, type, adress, working_time, working_days,
                 description, phone, web, tags} = req.body
     
             const img = req.files.picture
             let fileName = uuid.v4() + ".jpg"
             img.mv(path.resolve(__dirname, '..', 'img', fileName))
     
-            const object = new Object({name, category, type, adress, working_time, break_time, working_days,
+            const object = new Object({name, category, type, adress, working_time, working_days,
                 description, phone, web, tags, picture: fileName});
             await object.save()
 
