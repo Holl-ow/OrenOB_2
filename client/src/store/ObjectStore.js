@@ -9,6 +9,9 @@ export default class ObjectStore {
         this._selectedTags = []
         this._selectedCateg = {}
         this._selectedType = {}
+        this._page = 1
+        this._totalCount = 0
+        this._limit = 6
         makeAutoObservable(this)
     }
 
@@ -25,14 +28,21 @@ export default class ObjectStore {
         this._objects = objects
     }
 
-
-    setSelectedCateg(categsObj){
-        this._selectedCateg = categsObj
+    setPage(page) {
+        this._page = page
     }
-    setSelectedType(typesObj){
+    setTotalCount(count) {
+        this._totalCount = count
+    }
+
+    setSelectedCateg(categsObj) {
+        this._selectedCateg = categsObj
+        this.setPage(1)
+    }
+    setSelectedType(typesObj) {
         this._selectedType = typesObj
     }
-    selectedTags(tagsObj){
+    selectedTags(tagsObj) {
         this._selectedTags = tagsObj
     }
 
@@ -49,6 +59,7 @@ export default class ObjectStore {
     get objects() {
         return this._objects
     }
+
     get selectedCateg() {
         return this._selectedCateg
     }
@@ -59,4 +70,13 @@ export default class ObjectStore {
         return this._selectedTags
     }
 
+    get totalCount() {
+        return this._totalCount
+    }
+    get page() {
+        return this._page
+    }
+    get limit() {
+        return this._limit
+    }
 }

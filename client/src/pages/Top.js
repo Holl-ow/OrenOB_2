@@ -1,12 +1,65 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Col, Container, Row, Carousel } from 'react-bootstrap'
 
 export const Top = () => {
-    return (
-        <div>
-            <h1>Top Page</h1>
-            
-            
 
-        </div>
+    const [index, setIndex] = useState(0);
+
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
+
+
+
+    return (
+        <Container>
+            <Row>
+                <h3 className='mt-4 d-flex justify-content-start'>Наиболее популярные места</h3>
+                
+                <Carousel activeIndex={index} onSelect={handleSelect}>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src='http://localhost:5000/b0c57c9b-a034-4a26-801b-0595a257b4ed.jpg'
+                            alt="First slide"
+                        />
+                        <Carousel.Caption>
+                            <h3>First slide label</h3>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src='http://localhost:5000/a0a47ade-6a49-4585-86e3-5a0f57e4d34e.jpg'
+                            alt="Second slide"
+                        />
+
+                        <Carousel.Caption>
+                            <h3>Second slide label</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="holder.js/800x400?text=Third slide&bg=20232a"
+                            alt="Third slide"
+                        />
+
+                        <Carousel.Caption>
+                            <h3>Third slide label</h3>
+                            <p>
+                                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                            </p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                </Carousel>
+            </Row>
+
+            <Row>
+
+            </Row>
+        </Container>
     )
 }

@@ -17,7 +17,7 @@ export const CreateObject = observer(({ show, onHide }) => {
     const [phone, setPhone] = useState('')
     const [web, setWeb] = useState('')
     const [file, setFile] = useState(null)
-    //ДОбавить теги
+    const [tag, setTag] = useState([])
 
     useEffect(() => {
         fetchCategs().then(data => object.setCategsObj(data))
@@ -32,12 +32,28 @@ export const CreateObject = observer(({ show, onHide }) => {
     }
 
     const ChangeTag = (count) => {
-        console.log(`Нажали на тег ${count}`)
-       
+        if (tag.includes(count)) {
+            setTag(tag.filter(i => i !== count))
+        }
+        else {
+            setTag([...tag, count])
+        }
     }
 
     const addObject = () => {
-        createObject({ name: name }).then(data => {
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('category', object.selectedCateg._id)
+        formData.append('type', object.selectedType._id)
+        formData.append('adress', adress)
+        formData.append('working_time', workTime)
+        formData.append('working_days', workDay)
+        formData.append('description', descrip)
+        formData.append('phone', phone)
+        formData.append('web', web)
+        formData.append('picture', file)
+        formData.append('tags', JSON.stringify(tag))
+        createObject(formData).then(data => {
             setName('')
             setAdress('')
             setWorkTime('')
@@ -46,6 +62,7 @@ export const CreateObject = observer(({ show, onHide }) => {
             setPhone('')
             setWeb('')
             setFile(null)
+            setTag([])
             onHide()
         })
     }
@@ -141,15 +158,15 @@ export const CreateObject = observer(({ show, onHide }) => {
                         onChange={selectFile}
                     />
                     <div className='mt-3'>
-                        {object.tagsObj.map(tag =>
+                        {object.tagsObj.map(item =>
                             <Badge
                                 style={{ cursor: 'pointer' }}
                                 className='ms-1 me-1'
-                                bg="secondary"
-                                onClick={() => ChangeTag(tag.count)}
-                                key={tag._id}
+                                bg= { tag.includes(item.count) ? "success" : "secondary"}
+                                onClick={() => ChangeTag(item.count)}
+                                key={item._id}
                             >
-                                {tag.name}
+                                {item.name}
                             </Badge>
                         )}
                     </div>
